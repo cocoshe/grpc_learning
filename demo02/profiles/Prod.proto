@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package services;
+option go_package = "../services";
+import "Models.proto";
+
+message ProdRequest {
+  int32 prod_id = 1;
+  ProdAreas prod_ares = 2;
+}
+
+message ProdResponse {
+  int32 prod_stock = 1;
+}
+
+message QuerySize {
+  int32 size = 1;
+}
+
+message ProdRequestList {
+  repeated ProdResponse prodres = 1;
+}
+
+enum ProdAreas {
+  A = 0;
+  B = 1;
+  C = 2;
+}
+
+service ProdService {
+  rpc GetProdStock(ProdRequest) returns (ProdResponse){}
+  rpc GetProdStocks(QuerySize) returns (ProdRequestList){}
+  rpc GetProdInfo(ProdRequest) returns (ProdModel){}
+}
